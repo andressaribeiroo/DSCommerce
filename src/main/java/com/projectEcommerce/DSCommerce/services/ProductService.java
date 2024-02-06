@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.module.ResolutionException;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,8 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        Product product = repository.findById(id).get();
+        Product product = repository.findById(id).orElseThrow(
+                ()-> new ResolutionException("Id não encontrado"));
         return new ProductDTO(product);
     }
 
