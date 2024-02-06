@@ -2,11 +2,20 @@ package com.projectEcommerce.DSCommerce.dto;
 
 import com.projectEcommerce.DSCommerce.entities.Product;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO {
 
         private Long id;
+
+        @Size(min = 3, max = 50, message = "Nome de 3 a 80 caracteres")
+        @NotBlank(message = "Campo requerido")
         private String name;
+
+        @Size(max = 50, message = "Maximo 50 caracteres")
+        @NotBlank(message = "Campo requerido")
         private String description;
         private Double price;
         private String imgUrl;
